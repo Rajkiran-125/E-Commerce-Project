@@ -1,0 +1,19 @@
+{% include 'header.html' %}
+
+{% block content %}
+
+
+<div class="container cart">
+    <table>
+        <i style="font-size:15rem;" class="fa-solid fa-circle-check"></i><br><br>
+      <h1>Order Successfully Placed</h1><br>
+      <h4>Continue Shopping</h4><br>
+      </table>
+      <a href="{% url 'order' %}" class="checkout btn">See Orders</a>
+    </div>
+  </div>
+
+
+{% endblock %}
+
+{% include 'footer.html' %}

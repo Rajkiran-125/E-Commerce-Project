@@ -1,0 +1,28 @@
+.heading{
+    background-color: #911cdf;
+    text-align: center;
+    color: white;
+    border: 1px solid black;
+}
+.card{
+    border: 1px solid black;
+    width: 40rem;
+    padding: 1rem;
+}
+button{
+    outline: none;
+    border: none;
+    font-size: 1.6rem;
+    padding: 1rem 3rem;
+    margin-right: 1.5rem;
+    background-color: #911cdf;
+    color: white;
+    cursor: pointer;
+}
+.total-p{
+    width: 400px;
+    display: flex;
+    align-items: flex-end;
+    flex-direction: column;
+    margin-top: 2rem;
+  }

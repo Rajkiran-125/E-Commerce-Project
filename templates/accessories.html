@@ -1,0 +1,58 @@
+{% include 'header.html' %}
+
+{% block content %}
+
+<style>
+  .categories{
+    margin-left:10rem;
+    margin-top:5rem;
+  }
+  .categories h1{
+    color:#911cdf;
+  }
+  .categories .a{
+    background-color:#911cdf;
+    color:white;
+  }
+  .categories a{
+    border:1px solid black;
+    padding:0.5rem;
+  }
+</style>
+
+<div class="categories">
+  <h1>Categories</h1><br>
+  <a  href="menswear">Menswear</a><br><br>
+  <a  href="womenswear">Womenswear</a><br><br>
+  <a class="a" href="">Accessories</a>
+</div>
+
+<section class="section all-products" id="products">
+      <div class="product-center container">
+        {% for i in accessories %}
+          {% csrf_token %}
+          <div class="product-item">
+            <div class="overlay">
+              <a href="productdetails/{{i.id}}" class="product-thumb">
+                <img src="{{i.product_image.url}}" alt="" />
+              </a>
+              <span class="discount">20%</span>
+            </div>
+            <div class="product-info">
+              <span>{{i.brand}}</span>
+              <a href="productdetails/{{i.id}}">{{i.title}}</a>
+              <h4>₹{{i.price}}</h4>
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+    </section>
+
+    
+
+  </body>
+</html>
+
+{% endblock content %}
+
+{% include 'footer.html' %}

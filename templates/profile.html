@@ -1,0 +1,52 @@
+{% include 'header.html' %}
+
+{% block content %}
+
+<br>
+<br>
+
+<div class="container">
+  <h3>Hello,</h3>
+<h2 style='color:#911cdf;'>{{request.user | upper}}</h2><br>
+<br>
+<br>
+<a class="add_address" href="{% url 'address' %}"><i class="fa-solid fa-plus"></i> Address</a><br>
+<br>
+<table class="table caption-top">
+        <thead>
+          <tr>
+            <th></th>
+            <th scope="col">Address</th>
+            <th scope="col">Name</th>
+            <th scope="col">Phone</th>
+            <th scope="col">Locality</th>
+            <th scope="col">City</th>
+            <th scope="col">Zipcode</th>
+            <th scope="col">Action</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            {% for i in add %}
+            <td></td>
+            <td>{{forloop.counter}}</td>
+            <td>{{i.name}}</td>
+            <td>{{i.phone}}</td>
+            <td>{{i.locality}}</td>
+            <td>{{i.city}}</td> 
+            <td>{{i.zipcode}}</td>
+            <td><a href="add_edit/{{i.id}}"><i class="fa-solid fa-pen-to-square"></i></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+              <a href="add_delete/{{i.id}}"><i class="fa-solid fa-trash"></i></a></td>
+            <td></td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+          
+</div>
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+
+{% endblock %}
+
+{% include 'footer.html' %}

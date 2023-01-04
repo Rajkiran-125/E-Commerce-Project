@@ -1,0 +1,278 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+    <!-- Boxicons -->
+    <link
+      href="https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <!-- Glide js -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Glide.js/3.4.1/css/glide.core.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Glide.js/3.4.1/css/glide.theme.css">
+    <!-- Custom StyleSheet -->
+    <link rel="stylesheet" href="static/css/styles.css" />
+    <title>ecommerce Website</title>
+  </head>
+  <body>
+    <!-- Header -->
+    <header class="header" id="header">
+      <!-- Top Nav -->
+      <div class="navigation">
+        <div class="nav-center container d-flex">
+          <a href="/" class="logo"><h1>E-commerce</h1></a>
+
+          <ul class="nav-list d-flex">
+            <li class="nav-item">
+              <a href="/" class="nav-link">Home</a>
+            </li>
+            <li class="nav-item">
+              <a href="menswear" class="nav-link">Shop</a>
+            </li>
+
+            {% comment %} <div class="searchbox">
+              <input type="text" class="search_input" placeholder="Search">
+            <button type="submit" class="searchButton">
+              <i class="fa fa-search"></i>
+            </button>
+            </div>  {% endcomment %}
+            {% comment %} <form class="search">
+              <div>
+                <input type="text" placeholder="Search here">
+              <a href="">Send</a>
+              </div>
+            </form> {% endcomment %}
+
+          </ul>
+
+          {% if user.is_authenticated %}
+            <div class="icons d-flex">
+              <li class="nav-item">
+                <a href="profile" class="nav-link">Hello! {{request.user | upper}}</a>
+              </li>
+              <li class="nav-item">
+                <a href="order" class="nav-link">Orders</a>
+              </li>
+              <li class="nav-item">
+                <a href="logout" class="nav-link">Logout</a>
+              </li>
+              <a href="cart" class="icon">
+                <i class="bx bx-cart"></i>
+                <span class="d-flex">5</span>
+              </a>
+            </div>
+            
+            {% else %}
+            <div class="icons d-flex">
+              <li class="nav-item">
+                <a href="{% url 'login' %}" class="nav-link">Login</a>
+              </li>
+            </div>
+
+          {% endif %}
+
+          <div class="hamburger">
+            <i class="bx bx-menu-alt-left"></i>
+          </div>
+        </div>
+      </div>
+
+
+    <div class="hero">
+      <div class="glide" id="glide_1">
+        <div class="glide__track" data-glide-el="track">
+          <ul class="glide__slides">
+            <li class="glide__slide">
+              <div class="center">
+                <div class="left">
+                  <span class="">New Inspiration 2022</span>
+                  <h1 class="">NEW COLLECTION!</h1>
+                  <p>Trending from men's and women's  style collection</p>
+                  <a href="#newarrivals" class="hero-btn">SHOP NOW</a>
+                </div>
+                <div class="right">
+                    <img class="img1" src="static/images/main-img1.png" alt="">
+                </div>
+              </div>
+            </li>
+            <li class="glide__slide">
+              <div class="center">
+                <div class="left">
+                  <span>New Inspiration 2020</span>
+                  <h1>THE PERFECT MATCH!</h1>
+                  <p>Trending from men's and women's  style collection</p>
+                  <a href="product" class="hero-btn">SHOP NOW</a>
+                </div>
+                <div class="right">
+                  <img class="img2" src="static/images/main-img2.png" alt="">
+                </div>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    </header>
+
+    <!-- Categories Section -->
+    <section class="section category">
+      <div class="cat-center">
+        <div class="cat">
+          <a href="{% url 'menswear' %}"><img src="static/images/cat1.jpg" alt="" /></a>
+          <div>
+            <p>MEN'S WEAR</p>
+          </div>
+        </div>
+        <div class="cat">
+          <a href="{% url 'womenswear' %}"><img src="static/images/cat3.jpg" alt="" /></a>
+          <div>
+            <p>WOMEN'S WEAR</p>
+          </div>
+        </div>
+        <div class="cat">
+          <a href="{% url 'accessories' %}"><img src="static/images/accessories1.webp" alt="" /></a>
+          <div>
+            <p>ACCESSORIES</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- New Arrivals -->
+    <section id="newarrivals" class="section new-arrival">
+      <div class="title">
+        <h1>NEW ARRIVALS</h1>
+        <p>All the latest picked from designer of our store</p>
+      </div>
+      <div class="product-center">
+        {% for m in newarrivals %}
+        {% csrf_token %}
+        <div class="product-item">
+          <div class="overlay">
+            <a href="productdetails/{{m.id}}" class="product-thumb">
+              <img src="{{m.product_image.url}}"/>
+            </a>
+          </div>
+          <div class="product-info">
+            <span>{{m.brand}}</span>
+            <a href="productdetails/{{m.id}}">{{m.title}}</a>
+            <h4>₹{{m.price}}</h4>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+    </section>
+
+
+    <!-- Promo -->
+
+    <section class="section banner">
+      <div class="left">
+        <span class="trend">Trend Design</span>
+        <h1>New Collection 2021</h1>
+        <p>New Arrival <span class="color">Sale 50% OFF</span> Limited Time Offer</p>
+        <a href="#" class="btn btn-1">Discover Now</a>
+      </div>
+      <div class="right">
+        <img src="static/images/banner.png" alt="">
+      </div>
+    </section>
+
+
+
+
+    <!-- Featured -->
+  
+    <section class="section new-arrival">
+      <div class="title">
+        <h1>Featured</h1>
+        <p>All the latest picked from designer of our store</p>
+      </div>
+
+      <div class="product-center">
+        {% for f in featured %}
+          {% csrf_token %}
+          <div class="product-item">
+            <div class="overlay">
+              <a href="productdetails/{{f.id}}" class="product-thumb">
+                <img src="{{f.product_image.url}}" alt="" />
+              </a>
+              <span class="discount">20%</span>
+            </div>
+            <div class="product-info">
+              <span>{{f.brand}}</span>
+              <a href="productdetails/{{f.id}}">{{f.title}}</a>
+              <h4>₹{{f.price}}</h4>
+            </div>
+          </div>
+        {% endfor %}
+       </div>
+      
+
+    </section>
+
+    <!-- Contact -->
+    <section class="section contact">
+      <div class="row">
+        <div class="col">
+          <h2>EXCELLENT SUPPORT</h2>
+          <p>We love our customers and they can reach us any time
+          of day we will be at your service 24/7</p>
+          <a href="" class="btn btn-1">Contact</a>
+        </div>
+        <div class="col">
+          <form>
+            <div>
+              <input type="email" placeholder="Email Address">
+            <a href="">Send</a>
+            </div>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <div class="row">
+        <div class="col d-flex">
+          <h4>INFORMATION</h4>
+          <a href="">About us</a>
+          <a href="">Contact Us</a>
+          <a href="">Term & Conditions</a>
+          <a href="">Shipping Guide</a>
+        </div>
+        <div class="col d-flex">
+          <h4>USEFUL LINK</h4>
+          <a href="">Online Store</a>
+          <a href="">Customer Services</a>
+          <a href="">Promotion</a>
+          <a href="">Top Brands</a>
+        </div>
+        <div class="col d-flex">
+          <span><i class='bx bxl-facebook-square'></i></span>
+          <span><i class='bx bxl-instagram-alt' ></i></span>
+          <span><i class='bx bxl-github' ></i></span>
+          <span><i class='bx bxl-twitter' ></i></span>
+          <span><i class='bx bxl-pinterest' ></i></span>
+        </div>
+      </div>
+      <br>
+      <br>
+      <br>
+      <div class="copyright">
+        Designed with &#10084; by <a href="">Rajkiran Jaiswar</a>
+      </div>
+    </footer>
+
+
+
+  </body>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Glide.js/3.4.1/glide.min.js"></script>
+  <script src="static/js/index.js"></script>
+  <script src="static/js/slider.js"></script>
+</html>

@@ -1,0 +1,71 @@
+{% include 'header.html' %}
+
+{% block content %}
+
+<!-- Bootstrap-->
+  
+<br><br><br><br>
+
+<div class="container">
+
+    {% comment %} <h1 class="heading">Orders Summary</h1><br>
+    <div class="ordersdetails">
+        </table>  
+        <div class="total-p">
+            <table>
+                <tr>
+                    <td><b>Quantity</b></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td><b>Subtotal</b></td>
+                    <td>₹{{amt}}</td>
+                </tr>
+                <tr>
+                    <td><b>Tax</b></td>
+                    <td>₹50</td>
+                </tr>
+                <tr>
+                    <td><b>Shipping</b></td>
+                    <td>₹50</td>
+                </tr>
+                <tr>
+                    <td><h2>Total</h2></td>
+                    <td><b>₹{{total_amt}}</b></td>
+                </tr>
+            </table><br>
+        </div>
+    </div> {% endcomment %}
+
+    <a class="add_address" href="{% url 'address'%}">Add Address</a>
+    <br>
+    <br>
+    <h1 class="heading">Select Shipping Address</h1><br>
+    <div class="Address">
+        <br>
+        <form action="payment">
+            {% for i in address %}
+            <div class="userdetails">
+                <div class="card">
+                    <h4>Name: {{i.name}}</h4><br>
+                    <p><b>Phone: {{i.phone}}</b></p><br>
+                    <p><b>Address</b>: {{i.locality}}, {{i.city}}-{{i.zipcode}}</p>
+                </div><br>
+                <label class="form-check-label fw-bold" for="custadd{{forloop.counter}}">
+                    <input class="form-check-input" type="radio" name="custid" id="custadd{{forloop.counter}}" value="{{i.id}}">
+                    Address {{forloop.counter}} </label><br><br><br>
+            </div>
+            {% endfor %}
+            <br>
+            <div class="buttons">
+                <button type="submit" class="signupbtn">Go to Payment</button>
+            </div>
+        </form>
+    </div>
+</div>
+          
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+
+{% endblock %}
+
+{% include 'footer.html' %}

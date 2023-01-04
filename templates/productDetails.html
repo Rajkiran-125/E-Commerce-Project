@@ -1,0 +1,167 @@
+{% include 'header.html' %}
+
+{% block content %}
+{% load static %}
+
+  <body>
+    {% if user.is_authenticated %}
+    {% csrf_token %}
+    <section class="section product-detail">
+      <div class="details container">
+        <div class="left image-container">
+          <div class="main">
+            <img src="{{product.product_image.url}}" id="zoom" alt="" />
+          </div>
+        </div>
+        <div class="right">
+          <span>{{product.brand}}</span>
+          <h1>{{product.title}}</h1>
+          <div class="price">₹{{product.price}}</div>
+          <form>
+            <div>
+              <select>
+                <option value="Select Size">
+                  Select Size
+                </option>
+                <option >{{product.size}}</option>
+              </select>
+              <span><i class="bx bx-chevron-down"></i></span>
+            </div>
+          </form>
+          <form class="form" action="{% url 'add_to_cart' %}">
+            <input type="hidden" name="product_id" value={{product.id}} id="product_id">
+            <button type="submit" class="addCart">Add To Cart</button>
+          </form>
+          <h3>Product Detail</h3>
+          <p>{{product.description}}</p>
+        </div>
+      </div>
+    </section>
+
+    {% else %}
+
+    {% csrf_token %}
+    <section class="section product-detail">
+      <div class="details container">
+        <div class="left image-container">
+          <div class="main">
+            <img src="{{product.product_image.url}}" id="zoom" alt="" />
+          </div>
+        </div>
+        <div class="right">
+          <span>{{product.brand}}</span>
+          <h1>{{product.title}}</h1>
+          <div class="price">₹{{product.price}}</div>
+          <form>
+            <div>
+              <select>
+                <option value="Select Size">
+                  Select Size
+                </option>
+                <option >{{product.size}}</option>
+              </select>
+              <span><i class="bx bx-chevron-down"></i></span>
+            </div>
+          </form>
+          <form class="form" action="{% url 'login' %}">
+            <input type="hidden" name="product_id" value={{product.id}} id="product_id">
+            <button type="submit" class="addCart">Add To Cart</button>
+          </form>
+          <h3>Product Detail</h3>
+          <p>{{product.description}}</p>
+        </div>
+      </div>
+    </section>
+
+    {% endif %}
+
+    <!-- Related -->
+    <section class="section featured">
+      <div class="top container">
+        <h1>Related Products</h1>
+      </div>
+      <div class="product-center container">
+        <div class="product-item">
+          <div class="overlay">
+            <a href="" class="product-thumb">
+              <img src="static/images/product-5.jpg" alt="" />
+            </a>
+          </div>
+          <div class="product-info">
+            <span>MEN'S CLOTHES</span>
+            <a href="">Concepts Solid Pink Men’s Polo</a>
+            <h4>$150</h4>
+          </div>
+          <ul class="icons">
+            <li><i class="bx bx-search"></i></li>
+            <li><i class="bx bx-cart"></i></li>
+          </ul>
+        </div>
+        <div class="product-item">
+          <div class="overlay">
+            <a href="" class="product-thumb">
+              <img src="static/images/product-2.jpg" alt="" />
+            </a>
+            <span class="discount">40%</span>
+          </div>
+          <div class="product-info">
+            <span>MEN'S CLOTHES</span>
+            <a href="">Concepts Solid Pink Men’s Polo</a>
+            <h4>$150</h4>
+          </div>
+          <ul class="icons">
+            <li><i class="bx bx-search"></i></li>
+            <li><i class="bx bx-cart"></i></li>
+          </ul>
+        </div>
+        <div class="product-item">
+          <div class="overlay">
+            <a href="" class="product-thumb">
+              <img src="static/images/product-7.jpg" alt="" />
+            </a>
+          </div>
+          <div class="product-info">
+            <span>MEN'S CLOTHES</span>
+            <a href="">Concepts Solid Pink Men’s Polo</a>
+            <h4>$150</h4>
+          </div>
+          <ul class="icons">
+            <li><i class="bx bx-search"></i></li>
+            <li><i class="bx bx-cart"></i></li>
+          </ul>
+        </div>
+        <div class="product-item">
+          <div class="overlay">
+            <a href="" class="product-thumb">
+              <img src="static/images/product-4.jpg" alt="" />
+            </a>
+            <span class="discount">40%</span>
+          </div>
+          <div class="product-info">
+            <span>MEN'S CLOTHES</span>
+            <a href="">Concepts Solid Pink Men’s Polo</a>
+            <h4>$150</h4>
+          </div>
+          <ul class="icons">
+            <li><i class="bx bx-search"></i></li>
+            <li><i class="bx bx-cart"></i></li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+   <script src="./js/zoomsl.min.js"></script>
+    <script>
+      $(function () {
+        console.log("hello");
+        $("#zoom").imagezoomsl({
+          zoomrange: [4, 4],
+        });
+      });
+    </script>
+  </body>
+</html>
+
+{% endblock content %}
+
+{% include 'footer.html' %}

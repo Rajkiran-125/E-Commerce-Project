@@ -1,0 +1,93 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+    <!-- Boxicons -->
+    <link
+      href="https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css"
+      rel="stylesheet"
+    />
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <!-- Glide js -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Glide.js/3.4.1/css/glide.core.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Glide.js/3.4.1/css/glide.theme.css">
+    <!-- Custom StyleSheet -->
+    <link rel="stylesheet" href="/static/css/styles.css" />
+    <link rel="stylesheet" href="/static/css/checkout.css" />
+    
+    <title>Ecommerce Website</title>
+  </head>
+  <body>
+    <!-- Header -->
+    <header class="header" id="header">
+      <!-- Top Nav -->
+      <div class="navigation">
+        <div class="nav-center container d-flex">
+          <a href="/" class="logo"><h1>E-commerce</h1></a>
+
+            <ul class="nav-list d-flex">
+              <li class="nav-item">
+                <a href="/" class="nav-link">Home</a>
+              </li>
+              <li class="nav-item">
+                <a href="{% url 'menswear' %}" class="nav-link">Shop</a>
+              </li>
+
+                {% comment %} <li class="searchbox">
+                  <input type="text" class="search_input" placeholder="Search">
+                  <button type="submit" class="searchButton">
+                    <i class="fa fa-search"></i>
+                  </button>
+                </li> {% endcomment %}
+
+            </ul>
+          {% if user.is_authenticated %}
+          
+
+          <div class="icons d-flex">
+            <li class="nav-item">
+              <a href="{% url "profile" %}" class="nav-link">Hello! {{request.user | upper}}</a>
+            </li>
+            <li class="nav-item">
+              <a href="{% url 'order' %}" class="nav-link">Orders</a>
+            </li>
+            <li class="nav-item">
+              <a href="{% url 'logout' %}" class="nav-link">Logout</a>
+            </li>
+            <a href="{% url 'cart' %}" class="icon">
+              <i class="bx bx-cart"></i>
+              <span class="d-flex">3</span>
+            </a>
+          </div> 
+            
+            {% else %}
+            <div class="icons d-flex">
+              <li class="nav-item">
+                <a href="{% url 'login' %}" class="nav-link">Login</a>
+              </li>
+            </div>
+
+          {% endif %}
+
+          <div class="hamburger">
+            <i class="bx bx-menu-alt-left"></i>
+          </div>
+        </div>
+      </div>
+
+
+  </body>
+  <script src="/static/js/jquery-3.6.1.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Glide.js/3.4.1/glide.min.js"></script>
+  <script src="/static/js/slider.js"></script>
+  <script src="/static/js/index.js"></script>
+</html>
+ 
+{% block content %}
+
+{% endblock  %}
